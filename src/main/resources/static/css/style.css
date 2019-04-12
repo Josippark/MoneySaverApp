@@ -1,0 +1,22 @@
+*{
+    font-family: 'Saira Extra Condensed', sans-serif;
+
+}
+body{
+    background: transparent url("../images/whiteGradient.png" ) ;
+}
+#logo{
+    width:6em;
+    margin-bottom:1em;
+}
+#title{
+    margin-top:.5em;
+    font-size: 60px;
+}
+
+.vertical-center {
+    text-align: center;
+}
+#insertForm{
+    display: inline-block;
+}

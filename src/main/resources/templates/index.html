@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head">
+</head>
+<body>
+<div class="vertical-center">
+    <div id="insertForm">
+        <div th:replace="fragments :: header"></div>
+        <div>
+            <a class="btn btn-warning" th:href="@{/expense/new}">Insert new expense</a>
+        </div>
+
+
+
+    </div>
+</div>
+<th:block th:replace="fragments:: scripts"></th:block>
+</body>
+</html>

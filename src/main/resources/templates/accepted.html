@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments :: head">
+</head>
+<body>
+<div class="vertical-center">
+    <div id="insertForm">
+        <div th:replace="fragments :: header"></div>
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Expense</th>
+                <th scope="col">Cost</th>
+                <th scope="col">Expense Type</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th scope="row">1</th>
+
+                <td th:if="${expense.name !=null}" th:text="${expense.name}"></td>
+                <td th:if="${expense.cost !=null}" th:text="${expense.cost}"></td>
+                <td th:if="${expense.expenseType !=null}" th:text="${expense.expenseType}"></td>
+
+            </tr>
+            <div class="card mb-3" style="max-width: 540px;">
+                <div class="row no-gutters">
+                    <div class="col-md-4">
+                        <img src="..." th:src="@{../images/account.png}" style="max-width: 100%; height: 11em;"
+                             class="card-img-top" alt="account">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title" th:text="${session.wallet.getWalletName()}"></h5>
+                            <p class="card-text">Current account</p>
+                            <p class="card-text"
+                               th:text="'Current balance: '+ ${session.wallet.getBalance()} + ' KN'"></p>
+
+                            <div sec:authorize="hasRole('ROLE_ADMIN')">
+                                <a class="btn btn-primary" th:href="@{/expense/endsession}">Reset my wallet</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </tbody>
+        </table>
+
+        <a class="btn btn-warning" th:href="@{/expense/new}">Back</a>
+
+    </div>
+</div>
+<th:block th:replace="fragments :: scripts"></th:block>
+</body>
+</html>

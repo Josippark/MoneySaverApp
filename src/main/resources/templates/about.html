@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments :: head">
+</head>
+<body>
+<div class="vertical-center">
+    <div id="insertForm">
+        <div th:replace="fragments :: header"></div>
+
+        <div class="card" style="width: 13rem;">
+            <img src="..." th:src="@{../images/myAvatar.png}" class="card-img-top" alt="my avatar">
+            <div class="card-body">
+                <p class="card-text">Izradio: Josip Pavlović</p>
+                <p class="card-text">Veleučilište Velika Gorica</p>
+                <p class="card-text">Web aplikacije u Javi</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+<th:block th:replace="fragments:: scripts"></th:block>
+</body>
+</html>

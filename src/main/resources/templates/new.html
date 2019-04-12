@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head">
+</head>
+<body>
+<div class="vertical-center">
+    <div id="insertForm">
+       <div th:replace="fragments :: header"></div>
+        <form method="POST"  th:object="${expense}" th:action="@{/expense/new}">
+            <div class="form-group">
+                <label>Insert Expense</label>
+                <input type="text" class="form-control"  th:field="*{name}" placeholder="Write your choice..">
+                <div class="alert alert-warning" role="alert" th:if="${#fields.hasErrors()}" th:errors="*{name}"></div>
+
+            </div>
+            <div class="form-group">
+                <label>Expense type</label>
+                <select  class="form-control"
+                         th:field="*{expenseType}">
+                    <option value="">---Choose value---</option>
+                    <option th:each="type : ${types}" th:value="${type}"
+                            th:text="${type}"></option>
+                </select>
+                <div class="alert alert-warning" role="alert" th:if="${#fields.hasErrors()}" th:errors="*{expenseType}"></div>
+            </div>
+            <div class="form-group">
+                <label>Price</label>
+                <input type="number" class="form-control" th:field="*{cost}" placeholder="Write price">
+                <div class="alert alert-warning" role="alert" th:if="${#fields.hasErrors()}" th:errors="*{cost}"></div>
+            </div>
+            <button type="submit" class="btn btn-warning">Send</button>
+        </form>
+    </div>
+</div>
+<th:block th:replace="fragments :: scripts"></th:block>
+
+</body>
+</html>
