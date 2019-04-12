@@ -17,6 +17,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+
+        //TODO: zamijenti za bazu
         auth.inMemoryAuthentication()
                 .passwordEncoder(passwordEncoder)
                 .withUser("user").password(passwordEncoder.encode("user")).roles("USER")
@@ -32,10 +34,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
+
+        //TODO: razvrzstati uloge i promjeniti nacin dohvata autorizacije
         http.authorizeRequests()
                 .antMatchers("/expense/**")
-                .hasAnyRole("USER")
+                .hasAnyRole("USER","ADMIN")
                 .antMatchers("/**").permitAll()
+                .and()
+                .authorizeRequests().antMatchers("/h2-console/**").permitAll()
                 .and()
                 .formLogin()
                 .loginPage("/login")
@@ -43,7 +49,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .logoutSuccessUrl("/login");
-
+        http.csrf().disable();
+        http.headers().frameOptions().disable();
 
     }
 
