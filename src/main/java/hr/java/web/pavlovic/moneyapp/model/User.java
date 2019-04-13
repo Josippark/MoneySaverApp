@@ -1,17 +1,28 @@
 package hr.java.web.pavlovic.moneyapp.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
+@Data
 @Table(name="user")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="USER_ID")
     private Long id;
 
     @NotEmpty
@@ -19,6 +30,8 @@ public class User {
     private String username;
     @NotEmpty
     private String password;
+
+    private boolean enabled;
 
     private Date dateCreated;
 
@@ -28,6 +41,27 @@ public class User {
             inverseJoinColumns = { @JoinColumn(name = "authority_id") })
     private Set<Authority> authorities = new HashSet<>();
 
-    public User() {
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private Set<Wallet> wallets;
+
+
+    public User(@NotEmpty String username, @NotEmpty String password, boolean enabled) {
+        this.username = username;
+        this.password = password;
+        this.enabled = enabled;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return id.equals(user.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, username, password, enabled, dateCreated, authorities);
     }
 }

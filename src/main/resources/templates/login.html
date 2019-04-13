@@ -10,7 +10,7 @@
         <head><title>Login Page</title></head>
         <body onload='document.f.j_username.focus();'>
         <h3>Login with Username and Password</h3>
-        <form name='f' method='POST' action='/login'>
+        <form name='f'  th:action="@{/signin}" method='POST'>
 
             <label>Username</label>
             <input type='text' class="form-control" name='username' value=''>
@@ -18,8 +18,8 @@
             <input type='password' class="form-control" name='password'/>
             <input id="remember_me" name="remember_me" type="checkbox" value=”true”/>
             <label for="remember_me">Remember me!</label>
-            <input type="hidden" class="form-control" name="_csrf" th:value="${_csrf.token}"/>
-            <input name="submit" class="form-control btn btn-warning" style="margin-bottom: 0.5em" type="submit"/>
+ <!--           <input type="hidden" class="form-control" name="_csrf" th:value="${_csrf.token}"/>
+-->            <input name="submit" class="form-control btn btn-warning" style="margin-bottom: 0.5em" type="submit"/>
             <input name="reset" class="form-control btn btn-warning" type="reset"/>
 
         </form>

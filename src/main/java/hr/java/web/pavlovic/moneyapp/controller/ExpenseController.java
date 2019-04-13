@@ -3,8 +3,8 @@ package hr.java.web.pavlovic.moneyapp.controller;
 import hr.java.web.pavlovic.moneyapp.model.Expense;
 import hr.java.web.pavlovic.moneyapp.model.ExpenseType;
 import hr.java.web.pavlovic.moneyapp.model.Wallet;
+import hr.java.web.pavlovic.moneyapp.model.WalletType;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -22,14 +22,13 @@ public class ExpenseController {
 
     @ModelAttribute("wallet")
     public Wallet loadWallet() {
-        Wallet wallet = new Wallet("Moj Wallet", Wallet.WalletType.TEKUĆI, 0);
+        Wallet wallet = new Wallet(0,"Moj Wallet", WalletType.TEKUĆI);
         log.info("Loading wallet: Balance: " + wallet.getBalance());
         log.info("Loading wallet: Type of Wallet: " + wallet.getWalletType());
         return wallet;
     }
 
     @GetMapping("/new")
-    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     public String showHome(Model model) {
         model.addAttribute("expense", new Expense());
         model.addAttribute("types", ExpenseType.values());
@@ -38,7 +37,6 @@ public class ExpenseController {
     }
 
     @PostMapping("/new")
-    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     public String processForm(@Validated Expense expense, Errors errors, @ModelAttribute("wallet") Wallet wallet, Model model) {
         model.addAttribute("expense", expense);
         if (errors.hasErrors()) {
