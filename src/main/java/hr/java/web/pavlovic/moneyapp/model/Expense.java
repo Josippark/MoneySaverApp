@@ -8,6 +8,7 @@ import org.hibernate.validator.constraints.Range;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.Objects;
 
 @Data
@@ -15,7 +16,7 @@ import java.util.Objects;
 @AllArgsConstructor
 @Entity
 @Table(name="expense")
-public class Expense {
+public class Expense implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

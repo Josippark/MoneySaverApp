@@ -7,6 +7,7 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Objects;
@@ -18,7 +19,7 @@ import java.util.Set;
 @Entity
 @Data
 @Table(name="user")
-public class User {
+public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,7 +44,7 @@ public class User {
 
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private Set<Wallet> wallets;
+    private Set<Wallet> wallets  = new HashSet<>();
 
 
     public User(@NotEmpty String username, @NotEmpty String password, boolean enabled) {

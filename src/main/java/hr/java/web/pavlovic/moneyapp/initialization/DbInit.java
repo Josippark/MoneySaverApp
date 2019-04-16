@@ -10,6 +10,8 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+
 @Component
 public class DbInit implements ApplicationListener<ContextRefreshedEvent> {
 
@@ -46,7 +48,11 @@ public class DbInit implements ApplicationListener<ContextRefreshedEvent> {
 
         user.getAuthorities().add(authority);
         wallet.getExpenses().add(expense);
+        expense.setWallet(wallet);
+        wallet.setUser(user);
         user.getWallets().add(wallet);
+
+
 
         userRepository.save(user);
         expenseRepository.save(expense);

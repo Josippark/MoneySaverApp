@@ -5,6 +5,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -13,7 +16,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Entity
 @Table(name = "wallets")
-public class Wallet {
+public class Wallet implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,7 +36,7 @@ public class Wallet {
     private WalletType walletType;
 
     @OneToMany(mappedBy = "wallet", cascade = CascadeType.ALL)
-    private Set<Expense> expenses;
+    private Set<Expense> expenses = new HashSet<>();
 
     @Override
     public boolean equals(Object o) {
